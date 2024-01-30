@@ -96,6 +96,7 @@ class PACreditsState extends MusicBeatState
         bg.frames = Paths.getSparrowAtlas('fpmenu/background');
         bg.animation.addByPrefix('idle', 'background idle', 30, true);
         bg.animation.play('idle');
+	bg.scale.set(3, 3);
         bg.antialiasing = ClientPrefs.globalAntialiasing;
         add(bg);
         bg.screenCenter();
