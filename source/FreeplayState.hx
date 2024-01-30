@@ -38,8 +38,6 @@ class FreeplayState extends MusicBeatState
 	var curDifficulty:Int = -1;
 	private static var lastDifficultyName:String = '';
 
-	var pibbyFNF:Shaders.Pibbified;
-
 	var dogeTxt:FlxText;
 
 	var scoreBG:FlxSprite;
@@ -68,7 +66,6 @@ class FreeplayState extends MusicBeatState
 	private var iconArray:Array<HealthIcon> = [];
 
 	var threatPercent:Int;
-    var glitchFWFNF:FlxRuntimeShader = if (!ClientPrefs.lowQuality) new FlxRuntimeShader(RuntimeShaders.fwGlitch, null, 100) else new FlxRuntimeShader(RuntimeShaders.fwGlitchtrash, null, 100);
 
 	var bg:FlxSprite;
     var arrowL:FlxSprite;
@@ -82,8 +79,6 @@ class FreeplayState extends MusicBeatState
 	var levelBarBG:FlxSprite;
 	var levelBar:FlxBar;
 	var gradient:FlxSprite;
-
-	var bloomFNF:FlxRuntimeShader = if (!ClientPrefs.lowQuality) new FlxRuntimeShader(RuntimeShaders.dayybloomshader, null, 100) else new FlxRuntimeShader(RuntimeShaders.dayybloomshadertrash, null, 100);
 
 	var canPress = false;
 	var saveY:Float;
