@@ -58,7 +58,6 @@ class FreeplayState extends MusicBeatState
 
     var pressed:Float = 0;
 
-	var shaderIntensity:Float;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -182,7 +181,6 @@ class FreeplayState extends MusicBeatState
 				add(arrowL);
 				arrowL.scale.set(4, 4);
 				arrowL.blend = ADD;
-				if (ClientPrefs.shaders) arrowL.shader = bloomFNF;
 				arrowL.screenCenter();
 
 				arrowR = new FlxSprite().loadGraphic(Paths.image('fpmenu/arrowR'));
@@ -190,7 +188,6 @@ class FreeplayState extends MusicBeatState
 				add(arrowR);
 				arrowR.scale.set(4, 4);
 				arrowR.blend = ADD;
-				if (ClientPrefs.shaders) arrowR.shader = bloomFNF;
 				arrowR.screenCenter();
 			}
 
@@ -198,14 +195,12 @@ class FreeplayState extends MusicBeatState
 		songText.antialiasing = ClientPrefs.globalAntialiasing;
 		songText.setFormat(Paths.font("mum.ttf"), 64, FlxColor.WHITE, CENTER);
 		if (!ClientPrefs.lowQuality) songText.blend = ADD;
-		if (ClientPrefs.shaders) songText.shader = bloomFNF;
 		add(songText);
 
 		artistText = new FlxTypeText(songText.x, songText.y + 80, Std.int(FlxG.width * 1), "");
 		artistText.antialiasing = ClientPrefs.globalAntialiasing;
 		artistText.setFormat(Paths.font("type.ttf"), 36, FlxColor.WHITE, CENTER);
 		if (!ClientPrefs.lowQuality) artistText.blend = ADD;
-		if (ClientPrefs.shaders) artistText.shader = bloomFNF;
 		add(artistText);
 
 		levelBarBG = new FlxSprite(threat.x + 630, threat.y + 510).loadGraphic(Paths.image('fpmenu/threatBarBG'));
@@ -350,7 +345,6 @@ class FreeplayState extends MusicBeatState
 	public static var vocals:FlxSound = null;
 	var holdTime:Float = 0;
 	var gradientSineThing:Float = 0;
-    var shaderStuff:Float = 0;
 	override function update(elapsed:Float)
 	{
 		if (FlxG.sound.music.volume < 0.7)
@@ -358,16 +352,7 @@ class FreeplayState extends MusicBeatState
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
 
-		if(ClientPrefs.shaders) {
-            if (allowGlitch) {
-                shaderStuff += elapsed;
-            }else{
-                shaderStuff = 0;
-            }
-			pibbyFNF.glitchMultiply.value[0] = shaderIntensity;
-			pibbyFNF.uTime.value[0] += elapsed;
-            glitchFWFNF.setFloat('iTime', shaderStuff);
-		}
+	
 
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
@@ -514,7 +499,6 @@ class FreeplayState extends MusicBeatState
             new FlxTimer().start(0.35, function(tmr:FlxTimer) {
                 allowGlitch = false;
             });
-            if (ClientPrefs.shaders) FlxG.camera.setFilters([new ShaderFilter(pibbyFNF), new ShaderFilter(glitchFWFNF)]);
             var gameObjects = [bg, arrowL, arrowR, arrows, image, stagebox, stagebox_L, stagebox_R, threat, levelBarBG, gradient];
             for(index in 0...gameObjects.length){
                 fuckNum = Std.int(100*pressed);
@@ -531,7 +515,6 @@ class FreeplayState extends MusicBeatState
                 resetSecretTimer = new FlxTimer().start(3, function(tmr:FlxTimer) {
                     pressed = 0;
                     FlxTween.tween(noHeroIntro, {alpha: 0.001}, 0.25, {ease: FlxEase.quadInOut});
-                    if (ClientPrefs.shaders) FlxG.camera.setFilters([new ShaderFilter(pibbyFNF)]);
                     FlxG.camera.y = saveY;
                     noHeroIntro.y = saveHeroY;
                     var gameObjects = [bg, arrowL, arrowR, arrows, image, stagebox, stagebox_L, stagebox_R, threat, levelBarBG, gradient];
@@ -582,11 +565,10 @@ class FreeplayState extends MusicBeatState
 		super.stepHit();
 		if (FlxG.random.int(0, 1) < 0.01) 
 			{
-				shaderIntensity = FlxG.random.float(0.2, 0.3);
+			//	shaderIntensity = FlxG.random.float(0.2, 0.3);
 			}
 			
-			if (ClientPrefs.shaders)
-			pibbyFNF.glitchMultiply.value[0] = shaderIntensity;
+		
 	}
 
 	public static function destroyFreeplayVocals() {
