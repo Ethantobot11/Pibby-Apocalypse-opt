@@ -101,10 +101,7 @@ class FreeplayState extends MusicBeatState
 		WeekData.reloadWeekFiles(false);
 
 		FlxG.camera.filtersEnabled = true;
-		pibbyFNF = new Shaders.Pibbified();
-
-		if (ClientPrefs.shaders) FlxG.camera.setFilters([new ShaderFilter(pibbyFNF)]);
-
+	
 		Conductor.bpm = 100;
 
 		#if desktop
@@ -149,6 +146,7 @@ class FreeplayState extends MusicBeatState
         bg.frames = Paths.getSparrowAtlas('fpmenu/background');
         bg.animation.addByPrefix('idle', 'background idle', 30, true);
         bg.animation.play('idle');
+	bg.scale.set(3, 3);
         bg.antialiasing = ClientPrefs.globalAntialiasing;
         add(bg);
         bg.screenCenter();
