@@ -17,6 +17,7 @@ class ClientPrefs {
 	public static var lowQuality:Bool = false;
 	public static var shaders:Bool = false;
 	public static var healthDrain:Bool = true;
+	public static var combohudgame:Bool = true;
   public static var gore:Bool = true;
   public static var screenGlitch:Bool = true;
 	public static var framerate:Int = 60;
