@@ -4535,6 +4535,38 @@ class PlayState extends MusicBeatState
 					altAnim = '-alt';
 				}
 			}
+			
+			if (!note.gfNote)
+			{
+			iconP2.scale.set(1.3, 1.3);
+			iconP2.updateHitbox();
+			}
+			
+			if (ClientPrefs.onlineote)
+			{
+			if (note.isSustainNote)
+			{
+			if (note.gfNote)
+			{
+			gf.holdTimer = 0;
+			}
+			dad.holdTimer = 0;
+			}
+			}
+			
+			if (note.gfNote)
+			{
+			iconP3.scale.set(1.3, 1.3);
+			iconP3.updateHitbox();
+			iconPibby.scale.set(1.2, 1.2);
+			iconPibby.updateHitbox();
+			}
+			
+			if (note.noteType == 'Second Char Glitch' || note.noteType == 'Both Char Glitch')
+			{
+			iconJake.scale.set(1.2, 1.2);
+			iconJake.updateHitbox();
+			}
 
 			if(!note.gfNote) {
                 if (healthDrain) {
@@ -4756,6 +4788,30 @@ class PlayState extends MusicBeatState
 				}
 				return;
 			}
+			
+			if (!note.gfNote)
+			{
+			iconP1.scale.set(1.3, 1.3);
+			iconP1.updateHitbox();
+			}
+			
+			if (note.gfNote)
+			{
+			iconP3.scale.set(1.2, 1.2);
+			iconP3.updateHitbox();
+			}
+			
+			if (ClientPrefs.onlineNote)
+			{
+			if (note.isSustainNote)
+			{
+			if (note.gfNote)
+			{
+			gf.holdTimer = 0;
+			}
+			boyfriend.holdTimer = 0;
+			}
+			}
 
 			if (!note.isSustainNote)
 			{
@@ -4833,6 +4889,8 @@ class PlayState extends MusicBeatState
                         pibbySings = true;		
 						gf.playAnim(animToPlay + note.animSuffix, true);
 						gf.holdTimer = 0;
+						iconPibby.scale.set(1, 1);
+				        iconPibby.updateHitbox();
 					}
 				}
 				else
