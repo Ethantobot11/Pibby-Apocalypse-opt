@@ -246,7 +246,7 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplaySine = 0;
 				case 'Chart Editor':
 				close();
-				PlayState.canPause = false;
+				PlayState.instance.canPause = false;
 				FlxTween.tween(FlxG.sound.music, {pitch: 0.001}, 6, {onComplete: e -> FlxG.sound.music.stop()});
 				FlxTween.tween(FlxG.camera, {zoom: FlxG.camera.zoom + 0.6}, 6);
 				FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 5);
