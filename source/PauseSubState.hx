@@ -237,12 +237,21 @@ class PauseSubState extends MusicBeatSubstate
 				case 'Toggle Botplay':
 					PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
 					PlayState.changedDifficulty = true;
-					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
+					botplayTxt.visible = PlayState.instance.cpuControlled;
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
 				case 'Chart Editor':
-		            MusicBeatState.switchState(new editors.ChartingState());
-		            PlayState.chartingMode = true;
+		                PlayState.canPause = false;
+				FlxTween.tween(FlxG.sound.music, {pitch: 0.001}, 6, {onComplete: e -> FlxG.sound.music.stop()});
+				FlxTween.tween(FlxG.camera, {zoom: FlxG.camera.zoom + 0.6}, 6);
+				FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 5);
+				FlxTween.tween(PlayState.instance.vocals, {pitch: 0.001}, 6, {onComplete: e -> vocals.stop()});
+				FlxG.sound.music.fadeOut(6.5);
+				vocals.fadeOut(6.5);
+				FlxG.camera.fade(FlxColor.BLACK, 6, false, () -> {
+					FlxG.sound.music.stop();
+					new FlxTimer().start(2, e -> youCheatedRah());
+				});
 				case "Exit to menu":
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
