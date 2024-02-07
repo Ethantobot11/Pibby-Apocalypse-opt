@@ -52,6 +52,13 @@ class PibbyOptionsSubState extends BaseOptionsMenu
             true); //Default value
         addOption(option);
 
+	var option:Option = new Option('Rating Cam hud game', //Name
+            'idk', //Description
+            'combohudgame', //Save data variable name
+            'bool', //Variable type
+            true); //Default value
+        addOption(option);
+
         // grr i hate society sometimes
 		var option:Option = new Option('Low Quality', //Name
             'If checked, disables some background details,\ndecreases loading times and improves performance.', //Description
