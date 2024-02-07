@@ -59,6 +59,13 @@ class PibbyOptionsSubState extends BaseOptionsMenu
             true); //Default value
         addOption(option);
 
+	var option:Option = new Option('onlineNote mode', //Name
+            'idk', //Description
+            'onlineNote', //Save data variable name
+            'bool', //Variable type
+            false); //Default value
+        addOption(option);
+
         // grr i hate society sometimes
 		var option:Option = new Option('Low Quality', //Name
             'If checked, disables some background details,\ndecreases loading times and improves performance.', //Description
