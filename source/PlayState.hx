@@ -4542,7 +4542,7 @@ class PlayState extends MusicBeatState
 			iconP2.updateHitbox();
 			}
 			
-			if (ClientPrefs.onlineote)
+			if (ClientPrefs.onlineNote)
 			{
 			if (note.isSustainNote)
 			{
