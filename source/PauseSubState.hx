@@ -2,6 +2,10 @@ package;
 
 import Controls.Control;
 import flixel.FlxG;
+import Section.SwagSection;
+import Song.SwagSong;
+import flixel.util.FlxTimer;
+import haxe.Timer;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
 import flixel.addons.transition.FlxTransitionableState;
@@ -245,13 +249,13 @@ class PauseSubState extends MusicBeatSubstate
 		                PlayState.canPause = false;
 				FlxTween.tween(FlxG.sound.music, {pitch: 0.001}, 6, {onComplete: e -> FlxG.sound.music.stop()});
 				FlxTween.tween(FlxG.camera, {zoom: FlxG.camera.zoom + 0.6}, 6);
-				FlxTween.tween(PlayState.camHUD, {alpha: 0}, 5);
-				FlxTween.tween(PlayState.vocals, {pitch: 0.001}, 6, {onComplete: e -> vocals.stop()});
+				FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 5);
+				FlxTween.tween(PlayState.instance.vocals, {pitch: 0.001}, 6, {onComplete: e -> vocals.stop()});
 				FlxG.sound.music.fadeOut(6.5);
-				PlayState.vocals.fadeOut(6.5);
+				PlayState.instance.vocals.fadeOut(6.5);
 				FlxG.camera.fade(FlxColor.BLACK, 6, false, () -> {
 					FlxG.sound.music.stop();
-					new FlxTimer().start(2, e -> youCheatedRah());
+					new FlxTimer().start(2, e -> PlayState.youCheatedRah());
 				});
 				case "Exit to menu":
 					PlayState.deathCounter = 0;
