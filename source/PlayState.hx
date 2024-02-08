@@ -4795,7 +4795,7 @@ class PlayState extends MusicBeatState
 			iconP1.updateHitbox();
 			}
 			
-			if (note.gfNote)
+			if (note.noteType == 'GF Sing')
 			{
 			iconP3.scale.set(1.2, 1.2);
 			iconP3.updateHitbox();
