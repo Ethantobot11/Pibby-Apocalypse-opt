@@ -4536,11 +4536,11 @@ class PlayState extends MusicBeatState
 				}
 			}
 			
-			if (!note.gfNote)
+			//if (!note.gfNote)
 			{
 			iconP2.scale.set(1.3, 1.3);
 			iconP2.updateHitbox();
-			}
+			//}
 			
 			if (ClientPrefs.onlineNote)
 			{
@@ -4553,7 +4553,8 @@ class PlayState extends MusicBeatState
 			dad.holdTimer = 0;
 			}
 			}
-			
+			if(gf != null)
+			{
 			if (note.gfNote)
 			{
 			iconP3.scale.set(1.3, 1.3);
@@ -4561,11 +4562,11 @@ class PlayState extends MusicBeatState
 			iconPibby.scale.set(1.2, 1.2);
 			iconPibby.updateHitbox();
 			}
-			
+			}
 			if (note.noteType == 'Second Char Glitch' || note.noteType == 'Both Char Glitch')
 			{
-			iconJake.scale.set(1.2, 1.2);
-			iconJake.updateHitbox();
+			//iconJake.scale.set(1.2, 1.2);
+			//iconJake.updateHitbox();
 			}
 
 			if(!note.gfNote) {
@@ -4611,6 +4612,8 @@ class PlayState extends MusicBeatState
                 jakeSings = true;
 			}
 			else if (note.noteType == 'Second Char Glitch' || note.noteType == 'Both Char Glitch') {
+			    iconJake.scale.set(1.2, 1.2);
+			    iconJake.updateHitbox();
 				char = jake;
                 jakeSings = true;
                 glitching = true;
@@ -4794,13 +4797,14 @@ class PlayState extends MusicBeatState
 			iconP1.scale.set(1.3, 1.3);
 			iconP1.updateHitbox();
 			}
-			
+			if(gf != null)
+			{
 			if (note.noteType == 'GF Sing')
 			{
 			iconP3.scale.set(1.2, 1.2);
 			iconP3.updateHitbox();
 			}
-			
+			}
 			if (ClientPrefs.onlineNote)
 			{
 			if (note.isSustainNote)
