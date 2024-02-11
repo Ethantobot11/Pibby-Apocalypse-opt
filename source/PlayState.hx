@@ -4536,11 +4536,11 @@ class PlayState extends MusicBeatState
 				}
 			}
 			
-			//if (!note.gfNote)
+			if (!note.gfNote)
 			{
 			iconP2.scale.set(1.3, 1.3);
 			iconP2.updateHitbox();
-			//}
+			}
 			
 			if (ClientPrefs.onlineNote)
 			{
@@ -4797,6 +4797,7 @@ class PlayState extends MusicBeatState
 			iconP1.scale.set(1.3, 1.3);
 			iconP1.updateHitbox();
 			}
+			
 			if(gf != null)
 			{
 			if (note.noteType == 'GF Sing')
@@ -4805,6 +4806,7 @@ class PlayState extends MusicBeatState
 			iconP3.updateHitbox();
 			}
 			}
+			
 			if (ClientPrefs.onlineNote)
 			{
 			if (note.isSustainNote)
