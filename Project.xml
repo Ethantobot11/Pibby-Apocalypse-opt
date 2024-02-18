@@ -175,6 +175,10 @@
 	<android permission="android.permission.CAPTURE_AUDIO_OUTPUT"/>
 	<android target-sdk-version="29" if="android"/>
 
+	<!--Macro fixes-->
+	<haxeflag name="--macro" value="allowPackage('flash')" />
+	<haxeflag name="--macro" value="include('my.pack')" />
+
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
