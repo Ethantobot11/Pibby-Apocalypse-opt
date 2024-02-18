@@ -106,30 +106,8 @@ jobs:
       - name: Install Libraries
         run: |
           haxelib setup ~/haxelib
-          haxelib install hxcpp 4.2.1 > /dev/null
-          haxelib install lime 8.0.1
-          haxelib install openfl 9.2.1
-          haxelib --never install flixel 5.2.2
-          haxelib run lime setup flixel --quiet
-          haxelib install flixel-tools --quiet
-          haxelib install flixel-ui --quiet
-          haxelib install flixel-addons 3.0.2
-          haxelib install tjson --quiet
-          haxelib install hxjsonast --quiet
-          haxelib install hscript --quiet
-          haxelib install hxCodec 2.6.1 --quiet
-          haxelib git extension-androidtools https://github.com/Default-name123/oldtools --quiet
-          haxelib git linc_luajit https://github.com/Sirox228/linc_luajit --quiet
-          haxelib install hxcpp-debug-server --quiet
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
-          haxelib run lime setup -alias -y
-          haxelib set lime 8.0.1
-          haxelib set openfl 9.2.1
-          haxelib set flixel 5.2.2
-          haxelib set hxCodec 2.6.1
-          haxelib set flixel-addons 2.11.0
-          haxelib set hxcpp 4.2.1
           haxelib list
           # haxelib run lime rebuild extension-iostools ios -arm64 -final
 
