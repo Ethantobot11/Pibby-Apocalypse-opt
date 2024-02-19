@@ -4565,8 +4565,8 @@ class PlayState extends MusicBeatState
 			}
 			if (note.noteType == 'Second Char Glitch' || note.noteType == 'Both Char Glitch')
 			{
-			//iconJake.scale.set(1.2, 1.2);
-			//iconJake.updateHitbox();
+			iconJake.scale.set(1.2, 1.2);
+			iconJake.updateHitbox();
 			}
 
 			if(!note.gfNote) {
@@ -4798,14 +4798,7 @@ class PlayState extends MusicBeatState
 			iconP1.updateHitbox();
 			}
 			
-			if(gf != null)
-			{
-			if (note.noteType == 'GF Sing')
-			{
-			iconP3.scale.set(1.2, 1.2);
-			iconP3.updateHitbox();
-			}
-			}
+			
 			
 			if (ClientPrefs.onlineNote)
 			{
@@ -4897,6 +4890,8 @@ class PlayState extends MusicBeatState
 						gf.holdTimer = 0;
 						iconPibby.scale.set(1, 1);
 				        iconPibby.updateHitbox();
+				        iconP3.scale.set(1.2, 1.2);
+			            iconP3.updateHitbox();
 					}
 				}
 				else
