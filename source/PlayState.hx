@@ -4558,8 +4558,6 @@ class PlayState extends MusicBeatState
 			{
 			if (note.gfNote)
 			{
-			iconP3.scale.set(1.3, 1.3);
-			iconP3.updateHitbox();
 			iconPibby.scale.set(1.2, 1.2);
 			iconPibby.updateHitbox();
 			}
@@ -4889,10 +4887,6 @@ class PlayState extends MusicBeatState
                         pibbySings = true;		
 						gf.playAnim(animToPlay + note.animSuffix, true);
 						gf.holdTimer = 0;
-						iconPibby.scale.set(1, 1);
-				        iconPibby.updateHitbox();
-				        iconP3.scale.set(1.2, 1.2);
-			            iconP3.updateHitbox();
 					}
 				}
 				else
