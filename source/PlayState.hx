@@ -288,7 +288,8 @@ class PlayState extends MusicBeatState
     var distortIntensity:Float;
 	var dadGlitchIntensity:Float;
     var abberationShaderIntensity:Float;
-    var chromX.x = abberationShaderIntensity;
+    var chromX:FlxSprite;
+    
 	var blurIntensity:Float;
 
     var animOffsetValue:Float = 20;
@@ -858,6 +859,7 @@ class PlayState extends MusicBeatState
 		
 		chromX = new FlxSprite();
 		chromX.scrollFactor.set();
+		//chromX.x = abberationShaderIntensity;
 		add(chromX);
 
 		switch (SONG.song)
@@ -2698,8 +2700,11 @@ class PlayState extends MusicBeatState
 
 		if(ClientPrefs.shaders) {
 			shaderStuff += elapsed;
+			
+			//chromX.x = abberationShaderIntensity;
+		var abberationShaderIntensityx = chromX.x;
 
-            chromFNF.setFloat('amount', abberationShaderIntensity); // error in this shader/line
+            chromFNF.setFloat('amount', abberationShaderIntensityx); // error in this shader/line
 			pibbyFNF.glitchMultiply.value[0] = glitchShaderIntensity;
             distortFNF.setFloat('binaryIntensity', distortIntensity);
             distortCAWMFNF.setFloat('binaryIntensity', distortIntensity);
@@ -3420,7 +3425,8 @@ class PlayState extends MusicBeatState
 
 					FlxG.camera.zoom += camZoom;
 					camHUD.zoom += hudZoom;
-					abberationShaderIntensity = beatShaderAmount;
+					chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 				}
 
 			case 'Set Chromatic Amount':
@@ -6745,17 +6751,19 @@ class PlayState extends MusicBeatState
 							jake.alpha = 1;
 							theBlackness.alpha = 0;
 						case 2368:
-							FlxTween.tween(chromX, {x: 0.1}, 2.67, {
+						chromX.x = beatShaderAmount;
+							FlxTween.tween(chromX, {x: 0}, 2.67, {
 								ease: FlxEase.quadInOut,
 								onComplete: 
 								function (twn:FlxTween)
 									{
-										FlxTween.tween(chromX, {x: beatShaderAmount}, 1, {
+										FlxTween.tween(chromX, {x: 0}, 1, {
 											ease: FlxEase.quadInOut,
 											onComplete: 
 											function (twn:FlxTween)
 												{
-													abberationShaderIntensity = beatShaderAmount;
+													chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 												}});
 									}});
 					    case 2372:
@@ -7233,7 +7241,8 @@ class PlayState extends MusicBeatState
 								{
                                     if (ClientPrefs.camZooms)
 									{
-										abberationShaderIntensity = beatShaderAmount;
+										chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 										FlxG.camera.zoom += 0.015 * camZoomingMult;
 										camHUD.zoom += 0.03 * camZoomingMult;
 									}
@@ -7280,7 +7289,8 @@ class PlayState extends MusicBeatState
 									{
 										if (ClientPrefs.camZooms)
 											{
-												abberationShaderIntensity = beatShaderAmount;
+												chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 												FlxG.camera.zoom += 0.015 * camZoomingMult;
 												camHUD.zoom += 0.03 * camZoomingMult;
 											}
@@ -7327,7 +7337,8 @@ class PlayState extends MusicBeatState
 								{
                                     if (ClientPrefs.camZooms)
 										{
-											abberationShaderIntensity = beatShaderAmount;
+											chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 											FlxG.camera.zoom += 0.015 * camZoomingMult;
 											camHUD.zoom += 0.03 * camZoomingMult;
 										}
@@ -7374,7 +7385,8 @@ class PlayState extends MusicBeatState
 								{
                                     if (ClientPrefs.camZooms)
 									{
-										abberationShaderIntensity = beatShaderAmount;
+										chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 										FlxG.camera.zoom += 0.015 * camZoomingMult;
 										camHUD.zoom += 0.03 * camZoomingMult;
 									}
@@ -7420,7 +7432,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0 && ClientPrefs.camZooms)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7429,7 +7442,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7438,7 +7452,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 2 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7447,7 +7462,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7456,7 +7472,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 2 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7465,7 +7482,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7474,7 +7492,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7483,7 +7502,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7492,7 +7512,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7501,7 +7522,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7510,7 +7532,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7520,7 +7543,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 2 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7530,7 +7554,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 2 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7539,7 +7564,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7548,7 +7574,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7557,7 +7584,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 2 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7566,7 +7594,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 2 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7576,7 +7605,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7585,7 +7615,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7595,7 +7626,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7604,7 +7636,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7613,7 +7646,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7622,7 +7656,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 2 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7631,7 +7666,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7641,7 +7677,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 2 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7650,7 +7687,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7659,7 +7697,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 2 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7668,7 +7707,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0 && ClientPrefs.camZooms)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7677,7 +7717,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 2 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7686,7 +7727,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7695,7 +7737,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7705,7 +7748,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 2 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7714,7 +7758,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7723,7 +7768,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7732,7 +7778,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 2 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7741,7 +7788,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7750,7 +7798,8 @@ class PlayState extends MusicBeatState
 						{
 							if (curBeat % 1 == 0)
 								{
-                                    abberationShaderIntensity = beatShaderAmount;
+                                    chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 									FlxG.camera.zoom += 0.015 * camZoomingMult;
 									camHUD.zoom += 0.03 * camZoomingMult;
 								}
@@ -7763,7 +7812,8 @@ class PlayState extends MusicBeatState
 					{
 						if (curBeat % 1 == 0 && ClientPrefs.camZooms)
 						{
-							abberationShaderIntensity = beatShaderAmount;
+							chromX.x = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 							FlxG.camera.zoom += .035 * camZoomingMult;
 							camHUD.zoom += .053 * camZoomingMult;
 						}
@@ -7827,7 +7877,8 @@ class PlayState extends MusicBeatState
 
 			if (camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms)
 			{
-                abberationShaderIntensity = beatShaderAmount;
+                //abberationShaderIntensity = beatShaderAmount;
+                chromX.x = beatShaderAmount;
                 FlxTween.tween(chromX, {x: 0}, 0.35);
 				FlxG.camera.zoom += 0.015 * camZoomingMult;
 				camHUD.zoom += 0.03 * camZoomingMult;
