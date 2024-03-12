@@ -288,6 +288,7 @@ class PlayState extends MusicBeatState
     var distortIntensity:Float;
 	var dadGlitchIntensity:Float;
     var abberationShaderIntensity:Float;
+    var chromX.x = abberationShaderIntensity;
 	var blurIntensity:Float;
 
     var animOffsetValue:Float = 20;
@@ -359,6 +360,11 @@ class PlayState extends MusicBeatState
 
 	public var cinematicdown:FlxSprite;
 	public var cinematicup:FlxSprite;
+	
+	public var chromatic:Float = 0;
+	public var shaderXr:FlxSprite;
+	public var shaderXb:FlxSprite;
+	public var shaderXg:FlxSprite;
 
 	public var boyfriendCameraOffset:Array<Float> = null;
 	public var opponentCameraOffset:Array<Float> = null;
@@ -837,6 +843,22 @@ class PlayState extends MusicBeatState
 		blackie.scrollFactor.set();
 		blackie.alpha = 0;
 		add(blackie);
+		
+		shaderXr = new FlxSprite(0, 0);
+		shaderXr.scrollFactor.set();
+		add(shaderXr);
+		
+		shaderXb = new FlxSprite(0, 0);
+		shaderXb.scrollFactor.set();
+		add(shaderXb);
+		
+		shaderXg = new FlxSprite(0, 0);
+		shaderXg.scrollFactor.set();
+		add(shaderXg);
+		
+		chromX = new FlxSprite();
+		chromX.scrollFactor.set();
+		add(chromX);
 
 		switch (SONG.song)
 			{
@@ -1115,8 +1137,8 @@ class PlayState extends MusicBeatState
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
-		iconP1.cameras = [camHUD];
-		iconP2.cameras = [camHUD];
+		iconP1.cameras = [redflash];
+		iconP2.cameras = [redflash];
         if (gf != null) iconP3.cameras = [camHUD];
 		if (SONG.song == "Suffering Siblings") {
 			iconJake.cameras = [camHUD];
@@ -2677,7 +2699,7 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.shaders) {
 			shaderStuff += elapsed;
 
-            chromFNF.setFloat('aberration', abberationShaderIntensity); // error in this shader/line
+            chromFNF.setFloat('amount', abberationShaderIntensity); // error in this shader/line
 			pibbyFNF.glitchMultiply.value[0] = glitchShaderIntensity;
             distortFNF.setFloat('binaryIntensity', distortIntensity);
             distortCAWMFNF.setFloat('binaryIntensity', distortIntensity);
@@ -2717,7 +2739,7 @@ class PlayState extends MusicBeatState
 			iconP2.shake(0.11, 8, 1);
 
 		glitchShaderIntensity = FlxMath.lerp(glitchShaderIntensity, 0, CoolUtil.boundTo(elapsed * 7, 0, 1));
-        abberationShaderIntensity = FlxMath.lerp(abberationShaderIntensity, 0, CoolUtil.boundTo(elapsed * 6, 0, 1));
+        //abberationShaderIntensity = FlxMath.lerp(abberationShaderIntensity, 0, CoolUtil.boundTo(elapsed * 6, 0, 1));
 
 		var charAnimOffsetX:Float = 0;
 		var charAnimOffsetY:Float = 0;
@@ -6723,12 +6745,12 @@ class PlayState extends MusicBeatState
 							jake.alpha = 1;
 							theBlackness.alpha = 0;
 						case 2368:
-							FlxTween.tween(this, {abberationShaderIntensity: 0.1}, 2.67, {
+							FlxTween.tween(chromX, {x: 0.1}, 2.67, {
 								ease: FlxEase.quadInOut,
 								onComplete: 
 								function (twn:FlxTween)
 									{
-										FlxTween.tween(this, {abberationShaderIntensity: beatShaderAmount}, 1, {
+										FlxTween.tween(chromX, {x: beatShaderAmount}, 1, {
 											ease: FlxEase.quadInOut,
 											onComplete: 
 											function (twn:FlxTween)
@@ -7806,6 +7828,7 @@ class PlayState extends MusicBeatState
 			if (camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms)
 			{
                 abberationShaderIntensity = beatShaderAmount;
+                FlxTween.tween(chromX, {x: 0}, 0.35);
 				FlxG.camera.zoom += 0.015 * camZoomingMult;
 				camHUD.zoom += 0.03 * camZoomingMult;
 			}
