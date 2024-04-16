@@ -1139,8 +1139,8 @@ class PlayState extends MusicBeatState
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
-		iconP1.cameras = [redflash];
-		iconP2.cameras = [redflash];
+		iconP1.cameras = [camHUD];
+		iconP2.cameras = [camHUD];
         if (gf != null) iconP3.cameras = [camHUD];
 		if (SONG.song == "Suffering Siblings") {
 			iconJake.cameras = [camHUD];
