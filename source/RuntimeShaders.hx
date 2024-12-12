@@ -120,8 +120,7 @@ void main(){
 	vec4 col = ChromaticAbberationHUD(bitmap, uv);
 	
 	gl_FragColor = col;
-};
-    }";
+    };";
 
     var monitor = "
     #pragma header
