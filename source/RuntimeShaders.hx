@@ -95,7 +95,6 @@ enum abstract RuntimeShaders(String) to String from String
     var chromShader = "
     #pragma header
 
-//uniform float iTime;
 uniform float amount;
 
 vec2 PincushionDistortion(in vec2 uv, float strength) {
@@ -115,7 +114,7 @@ vec4 ChromaticAbberationHUD(sampler2D tex, in vec2 uv)
 	return retColor;
 }
 
-void main(){
+     void main(){
 	vec2 uv = openfl_TextureCoordv;
 	vec4 col = ChromaticAbberationHUD(bitmap, uv);
 	
