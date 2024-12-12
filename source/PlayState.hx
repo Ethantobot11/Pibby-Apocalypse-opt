@@ -3404,7 +3404,7 @@ class PlayState extends MusicBeatState
 			case 'Set Chromatic Amount':
 				if(ClientPrefs.shaders) {
 					var val1:Int = Std.parseInt(value1);
-					chromFNF.setFloat('aberration', val1);
+					chromFNF.setFloat('amount', val1);
 				}
 
             case 'Cinematics':
