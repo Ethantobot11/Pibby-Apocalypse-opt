@@ -119,7 +119,7 @@ vec4 ChromaticAbberationHUD(sampler2D tex, in vec2 uv)
 	vec4 col = ChromaticAbberationHUD(bitmap, uv);
 	
 	gl_FragColor = col;
-    };";
+    }";
 
     var monitor = "
     #pragma header
