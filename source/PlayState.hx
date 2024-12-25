@@ -1274,7 +1274,7 @@ class PlayState extends MusicBeatState
             }
 		}
 		if(ClientPrefs.shaders) {
-			chromFNF.setFloat('aberration', -0.5);
+			chromFNF.setFloat('amount', -0.5);
 		}
 
 		super.create();
@@ -4543,25 +4543,6 @@ class PlayState extends MusicBeatState
 			iconP2.updateHitbox();
 			}
 			
-			if (ClientPrefs.onlineNote)
-			{
-			if (note.isSustainNote)
-			{
-			if (note.gfNote)
-			{
-			gf.holdTimer = 0;
-			}
-			dad.holdTimer = 0;
-			}
-			}
-			if(gf != null)
-			{
-			if (note.gfNote)
-			{
-			iconPibby.scale.set(1.2, 1.2);
-			iconPibby.updateHitbox();
-			}
-			}
 			if (note.noteType == 'Second Char Glitch' || note.noteType == 'Both Char Glitch')
 			{
 			iconJake.scale.set(1.2, 1.2);
