@@ -27,7 +27,7 @@ jobs:
           haxelib install hxjsonast --quiet
           haxelib install hscript --quiet
           haxelib install hxCodec 2.6.1 --quiet
-          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git --quiet
+          haxelib git linc_luajit https://github.com/th2l-devs/linc_luajit.git --quiet
           haxelib install hxcpp-debug-server --quiet
           haxelib list
           haxelib run lime rebuild extension-iostools ios -arm64 -final
