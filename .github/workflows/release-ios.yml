@@ -30,7 +30,7 @@ jobs:
           haxelib git linc_luajit https://github.com/th2l-devs/linc_luajit.git --quiet
           haxelib install hxcpp-debug-server --quiet
           haxelib list
-          haxelib run lime rebuild extension-iostools ios -arm64 -final
+        # haxelib run lime rebuild extension-iostools ios -arm64 -final
 
       - name: Setup Lime
         run: |
