@@ -81,16 +81,8 @@ import sys.io.File;
 #end
 
 #if VIDEOS_ALLOWED 
-#if (hxCodec >= "3.0.0") 
-import hxcodec.flixel.FlxVideo as VideoHandler; 
-import hxcodec.flixel.FlxVideoSprite as VideoSprite;
-#elseif (hxCodec >= "2.6.1") 
-import hxcodec.VideoHandler as VideoHandler; 
-#elseif (hxCodec == "2.6.0") 
-import VideoHandler; 
-import vlc.MP4Handler as VideoHandler;
-import vlc.MP4Sprite as VideoSprite; 
-#end 
+import hxvlc.flixel.FlxVideo as VideoHandler; 
+import hxvlc.flixel.FlxVideoSprite as VideoSprite;
 #end
 
 class PlayState extends MusicBeatState
