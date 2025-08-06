@@ -81,8 +81,8 @@ import sys.io.File;
 #end
 
 #if VIDEOS_ALLOWED 
-import hxvlc.flixel.FlxVideo as VideoHandler; 
-import hxvlc.flixel.FlxVideoSprite as VideoSprite;
+import hxcodec.flixel.FlxVideo as VideoHandler; 
+import hxcodec.flixel.FlxVideoSprite as VideoSprite;
 #end
 
 class PlayState extends MusicBeatState
