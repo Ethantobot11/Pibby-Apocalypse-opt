@@ -86,7 +86,8 @@ import hxcodec.flixel.FlxVideo as VideoHandler;
 import hxcodec.flixel.FlxVideoSprite as VideoSprite;
 #elseif (hxCodec >= "2.6.1") 
 import hxcodec.VideoHandler as VideoHandler; 
-#elseif (hxCodec == "2.6.0") import VideoHandler; 
+#elseif (hxCodec == "2.6.0") 
+import VideoHandler; 
 #else import vlc.MP4Handler as VideoHandler;
 #else import vlc.MP4Sprite as VideoSprite; 
 #end 
