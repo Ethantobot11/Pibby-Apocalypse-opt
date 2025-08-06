@@ -26,7 +26,7 @@ jobs:
           haxelib install tjson --quiet
           haxelib install hxjsonast --quiet
           haxelib install hscript --quiet
-          haxelib haxelib hxCodec 3.0.2 --quiet
+          haxelib install hxCodec 3.0.2 --quiet
           haxelib git linc_luajit https://github.com/th2l-devs/linc_luajit.git --quiet
           haxelib install hxcpp-debug-server --quiet
           haxelib list
