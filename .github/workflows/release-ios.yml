@@ -22,7 +22,7 @@ jobs:
           haxelib run lime setup flixel --quiet
           haxelib install flixel-tools --quiet
           haxelib install flixel-ui --quiet
-          haxelib install flixel-addons 3.3.2--quiet
+          haxelib install flixel-addons --quiet
           haxelib install tjson --quiet
           haxelib install hxjsonast --quiet
           haxelib install hscript --quiet
