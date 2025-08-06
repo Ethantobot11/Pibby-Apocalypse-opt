@@ -2,7 +2,7 @@ name: Release
 on: workflow_dispatch
 jobs:
   iOS:
-     runs-on: macos-13
+     runs-on: macos-15
      steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -49,7 +49,7 @@ jobs:
           # tar -xf MobileVLCKit-3.5.1-34408b84-e9eceaed.tar.xz
 
       - name: Compile
-        run: haxelib run lime build ios -D -final
+        run: haxelib run lime build ios -nosign -D -final
 
       # - name: Check Code Signing
         # run: cd export/release/ios/build/Release-iphoneos && codesign -dv *.app
