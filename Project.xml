@@ -46,7 +46,7 @@
 	<!-- PSYCH ENGINE CUSTOMIZATION -->
 	<define name="MODS_ALLOWED" unless="desktop || mobile" />
 	<define name="LUA_ALLOWED" if="desktop || mobile" />
-	<define name="VIDEOS_ALLOWED" if="web || windows || mobile" unless="32bits"/>
+	<!-- <define name="VIDEOS_ALLOWED" if="web || windows || mobile" unless="32bits"/> -->
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="CRASH_HANDLER" if="desktop release || android" />
 
@@ -112,7 +112,7 @@
 
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
-	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
+	<haxelib name="linc_luajit" version="3.0.2" if="LUA_ALLOWED"/>
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED" /> <!--this version could be wrong but it works-->
 	<haxelib name="extension-androidtools" if="android"/>
 	<haxelib name="faxe" if='switch'/>
