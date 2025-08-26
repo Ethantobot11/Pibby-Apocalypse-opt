@@ -1688,7 +1688,6 @@ class PlayState extends MusicBeatState
 
 	public function youCheatedRah()
 	{
-		}
 
 		if(doPush)
 		{
