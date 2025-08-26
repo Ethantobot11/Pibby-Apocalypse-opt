@@ -2,7 +2,7 @@ name: iOS Release
 on: workflow_dispatch
 jobs:
   iOS:
-     runs-on: macos-15
+     runs-on: macos-13
      steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -24,31 +24,22 @@ jobs:
       - name: Install Libraries
         run: |
           haxelib setup ~/haxelib
-          haxelib git hxcpp https://github.com/th2l-devs/hxcpp --quiet
-          haxelib install lime 8.1.3 --quiet
+          haxelib git hxcpp https://github.com/kittycathy233/hxcpp --quiet
+          haxelib git lime https://github.com/kittycathy233/lime --quiet
           haxelib install openfl 9.2.1 --quiet
-          haxelib --never install flixel 5.2.2 --quiet
-          haxelib run lime setup flixel --quiet
+          haxelib git flixel https://github.com/kittycathy233/flixel --quiet
           haxelib install flixel-tools --quiet
           haxelib install flixel-ui --quiet
-          haxelib install flixel-addons 3.0.2 --quiet
+          haxelib install flixel-addons 3.1.2 --quiet
           haxelib install tjson --quiet
           haxelib install hxjsonast --quiet
           haxelib install hscript --quiet
-          haxelib install hxCodec 3.0.2 --quiet
-          haxelib git linc_luajit https://github.com/th2l-devs/linc_luajit.git --quiet
+          haxelib install hxvlc 2.0.1 --quiet
+          haxelib git linc_luajit https://github.com/kittycathy233/linc_luajit --quiet
           haxelib install hxcpp-debug-server --quiet
           haxelib list
         # haxelib run lime rebuild extension-iostools ios -arm64 -final
 
-      - name: Setup Lime
-        run: |
-          haxelib set lime 8.2.0
-          haxelib set openfl 9.2.1
-          haxelib set flixel 5.2.2
-          haxelib set hxCodec 2.11.0
-          haxelib set flixel-addons 3.0.2
-          haxelib set hxcpp git
     # sb 报错666
 
       # - name: Install MobileVLCKit Framework
