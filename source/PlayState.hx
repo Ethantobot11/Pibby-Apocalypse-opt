@@ -1688,74 +1688,103 @@ class PlayState extends MusicBeatState
 
 	public function youCheatedRah()
 	{
-		#if VIDEOS_ALLOWED
-		inCutscene = true;
-
-		var filepath:String = Paths.video('Cheating_is_a_sin');
-		if(!FileSystem.exists(filepath))
-		{
-			FlxG.log.warn('Couldnt find video file!!');
-			MusicBeatState.switchState(new FreeplayState());
-			return;
 		}
 
-		cheatingVideo.camera = camOther;
-		cheatingVideo.playVideo(filepath);
-		cheatingVideo.bitmap.canSkip = false;
-		cheatingVideo.scale.set(0.705, 0.705);
-		cheatingVideo.x -= 300;
-		cheatingVideo.y -= 170;
-		cheatingVideo.openingCallback = () -> {
-			persistentUpdate = false;
-			camOther.fade(0x000000, 3, true);
-		}
-		cheatingVideo.finishCallback = function()
+		if(doPush)
 		{
-			persistentUpdate = true;
-			lime.app.Application.current.window.alert('Our game, our rules' + '.' + '\n- Finn');
-			Sys.exit(0);
+			if(SScript.global.exists(scriptFile))
+				doPush = false;
+
+			if(doPush) initHScript(scriptFile);
 		}
-		#else
-		FlxG.log.warn('Platform not supported!');
-		MusicBeatState.switchState(new FreeplayState());
-		return;
 		#end
 	}
-	
-	public function startVideo(name:String)
+
+	public function getLuaObject(tag:String, text:Bool=true):FlxSprite {
+		#if LUA_ALLOWED
+		if(modchartSprites.exists(tag)) return modchartSprites.get(tag);
+		if(text && modchartTexts.exists(tag)) return modchartTexts.get(tag);
+		if(variables.exists(tag)) return variables.get(tag);
+		#end
+		return null;
+	}
+
+	function startCharacterPos(char:Character, ?gfCheck:Bool = false) {
+		if(gfCheck && char.curCharacter.startsWith('gf')) { //IF DAD IS GIRLFRIEND, HE GOES TO HER POSITION
+			char.setPosition(GF_X, GF_Y);
+			char.scrollFactor.set(0.95, 0.95);
+			char.danceEveryNumBeats = 2;
+		}
+		char.x += char.positionArray[0];
+		char.y += char.positionArray[1];
+	}
+
+	public var videoCutscene:VideoSprite = null;
+	public function startVideo(name:String, forMidSong:Bool = false, canSkip:Bool = true, loop:Bool = false, playOnLoad:Bool = true)
 	{
 		#if VIDEOS_ALLOWED
-		inCutscene = true;
+		inCutscene = !forMidSong;
+		canPause = forMidSong;
 
-		var filepath:String = Paths.video(name);
-		if(!FileSystem.exists(filepath))
-		{
-			FlxG.log.warn('Couldnt find video file: ' + name);
-			startAndEnd();
-			return;
-		}
+		var foundFile:Bool = false;
+		var fileName:String = Paths.video(name);
 
-		var video:VideoHandler = new VideoHandler();
-		video.playVideo(filepath);
-		video.finishCallback = function()
+		#if sys
+		if (FileSystem.exists(fileName))
+		#else
+		if (OpenFlAssets.exists(fileName))
+		#end
+		foundFile = true;
+
+		if (foundFile)
 		{
-			startAndEnd();
-			return;
+			videoCutscene = new VideoSprite(fileName, forMidSong, canSkip, loop);
+			if(forMidSong) videoCutscene.videoSprite.bitmap.rate = playbackRate;
+
+			// Finish callback
+			if (!forMidSong)
+			{
+				function onVideoEnd()
+				{
+					if (!isDead && generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null && !endingSong && !isCameraOnForcedPos)
+					{
+						moveCameraSection();
+						FlxG.camera.snapToTarget();
+					}
+					videoCutscene = null;
+					canPause = true;
+					inCutscene = false;
+					startAndEnd();
+				}
+				videoCutscene.finishCallback = onVideoEnd;
+				videoCutscene.onSkip = onVideoEnd;
+			}
+			if (GameOverSubstate.instance != null && isDead) GameOverSubstate.instance.add(videoCutscene);
+			else add(videoCutscene);
+
+			if (playOnLoad)
+				videoCutscene.play();
+			return videoCutscene;
 		}
+		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+		else addTextToDebug("Video not found: " + fileName, FlxColor.RED);
+		#else
+		else FlxG.log.error("Video not found: " + fileName);
+		#end
 		#else
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();
-		return;
 		#end
-	}
+		return null;
+	}	
 
-	function startAndEnd()
-	{
-		if(endingSong)
-			endSong();
-		else
-			startCountdown();
-	}
+		function startAndEnd()
+	    {
+		   if(endingSong)
+			   endSong();
+		   else
+			   startCountdown();
+	    }
 
 	var startTimer:FlxTimer;
 	var finishTimer:FlxTimer = null;
