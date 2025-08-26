@@ -1687,6 +1687,7 @@ class PlayState extends MusicBeatState
 	}
 
 	public function youCheatedRah()
+	{
 		#if VIDEOS_ALLOWED
 		inCutscene = !forMidSong;
 		canPause = forMidSong;
@@ -1743,13 +1744,13 @@ class PlayState extends MusicBeatState
 		return null;
 	}	
 
-		function startAndEnd()
-	    {
-		   if(endingSong)
-			   endSong();
-		   else
-			   startCountdown();
-	    }
+	function startAndEnd()
+	{
+		 if(endingSong)
+			 endSong();
+		 else
+			 startCountdown();
+    }
 
 	var startTimer:FlxTimer;
 	var finishTimer:FlxTimer = null;
