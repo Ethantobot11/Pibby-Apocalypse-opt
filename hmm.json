@@ -10,7 +10,7 @@
       "name": "linc_luajit",
       "type": "git",
       "ref": "main",
-      "url": "https://github.com/MobilePorting/linc_luajit-0.6.3"
+      "url": "https://github.com/kittycathy233/linc_luajit"
     },
     {
       "name": "extension-androidtools",
@@ -39,27 +39,24 @@
       "version": "2.4.0"
     },
     {
-      "name": "hxCodec",
-      "type": "git",
-      "ref": "main",
-      "url": "https://github.com/MobilePorting/hxCodec-0.6.3"
+      "name": "hxvlc",
+      "type": "haxelib",
+      "ref": "2.0.1"
     },
     {
       "name": "hxcpp",
-      "type": "git",
-      "ref": "master",
-      "url": "https://github.com/mcagabe19-stuff/hxcpp"
+      "type": "haxelib",
+      "ref": "4.2.1"
     },
     {
       "name": "lime",
-      "type": "git",
-      "ref": "main",
-      "url": "https://github.com/mcagabe19-stuff/lime"
+      "type": "haxelib",
+      "ref": "8.0.1"
     },
     {
       "name": "openfl",
       "type": "haxelib",
-      "version": "9.1.0"
+      "version": "9.2.1"
     }
   ]
 }
