@@ -23,23 +23,8 @@ jobs:
 
       - name: Install Libraries
         run: |
-          mkdir -p $HOME/haxelib
-          haxelib setup $HOME/haxelib
-          haxelib install hxcpp 4.2.1 > /dev/null --quiet
-          haxelib install lime 8.0.1 --quiet
-          haxelib install openfl 9.2.1 --quiet
-          haxelib --never install flixel 5.2.2 --quiet
-          haxelib run lime setup flixel --quiet
-          haxelib install flixel-tools --quiet
-          haxelib install flixel-ui --quiet
-          haxelib install flixel-addons 3.0.2
-          haxelib install tjson --quiet
-          haxelib install hxjsonast --quiet
-          haxelib install hscript --quiet
-          haxelib install hxvlc 2.0.1 --quiet
-          haxelib git linc_luajit https://github.com/kittycathy233/linc_luajit --quiet
-          haxelib install hxcpp-debug-server --quiet
-          haxelib list
+          haxelib install hmm --quiet
+          haxelib run hmm install --quiet
         # haxelib run lime rebuild extension-iostools ios -arm64 -final
 
     # sb 报错666
