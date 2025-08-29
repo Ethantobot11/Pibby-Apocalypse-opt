@@ -30,7 +30,7 @@ jobs:
 
       - name: Install Libraries
         run: |
-          haxelib install hmm --quiet
+          haxelib install hmm
           haxelib run hmm install --quiet
         # haxelib run lime rebuild extension-iostools ios -arm64 -final
 
