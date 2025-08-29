@@ -30,6 +30,7 @@ jobs:
 
       - name: Install Libraries
         run: |
+          haxelib setup ~/haxelib
           haxelib install hxcpp 4.2.1 --quiet
           haxelib install lime 8.0.1 --quiet
           haxelib install openfl 9.2.1 --quiet
