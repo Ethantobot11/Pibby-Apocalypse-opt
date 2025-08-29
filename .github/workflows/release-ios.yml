@@ -31,14 +31,14 @@ jobs:
       - name: Install Libraries
         run: |
           haxelib setup ~/haxelib
-          haxelib install hxcpp 4.2.1 --quiet
+          haxelib install hxcpp 4.2.0 --quiet
           haxelib install lime 8.0.1 --quiet
           haxelib install openfl 9.2.1 --quiet
-          haxelib --never install flixel 5.2.2 --quiet
+          haxelib install flixel 5.2.2 --quiet
           haxelib run lime setup flixel --quiet
           haxelib install flixel-tools --quiet
           haxelib install flixel-ui --quiet
-          haxelib install flixel-addons 3.0.2
+          haxelib install flixel-addons 3.0.2 --quiet
           haxelib install tjson --quiet
           haxelib install hxjsonast --quiet
           haxelib install hscript --quiet
