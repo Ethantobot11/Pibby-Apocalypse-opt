@@ -15,20 +15,20 @@ jobs:
       - name: Install Libraries
         run: |
           haxelib setup ~/haxelib
-          haxelib git hxcpp https://github.com/mcagabe19-stuff/hxcpp
-          haxelib install lime 8.0.1
-          haxelib install openfl 9.2.1
-          haxelib --never install flixel 5.2.2
-          haxelib run lime setup flixel
-          haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib install flixel-addons 3.0.2
-          haxelib install tjson
-          haxelib install hxjsonast
-          haxelib install hscript
-          haxelib install hxCodec 2.6.1
-          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
-          haxelib install hxcpp-debug-server
+          haxelib git hxcpp https://github.com/kittycathy233/hxcpp --quiet
+          haxelib install lime 8.0.1 --quiet
+          haxelib install openfl 9.2.1 --quiet
+          haxelib --never install flixel 5.2.2 --quiet
+          haxelib run lime setup flixel --quiet
+          haxelib install flixel-tools --quiet
+          haxelib install flixel-ui --quiet
+          haxelib install flixel-addons 3.0.2 --quiet
+          haxelib install tjson --quiet
+          haxelib install hxjsonast --quiet
+          haxelib install hscript --quiet
+          haxelib git hxvlc https://github.com/Ethantobot11/hxvlc-0.6.3 --quiet
+          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git --quiet
+          haxelib install hxcpp-debug-server --quiet
           haxelib list
       #  haxelib run lime rebuild extension-iostools ios -arm64 -final
 
@@ -37,7 +37,7 @@ jobs:
           haxelib set lime 8.0.1
           haxelib set openfl 9.2.1
           haxelib set flixel 5.2.2
-          haxelib set hxCodec 2.5.1
+          haxelib set hxvlc git
           haxelib set flixel-addons 2.11.0
           haxelib set hxcpp git
     # sb 报错666
@@ -49,7 +49,7 @@ jobs:
           # tar -xf MobileVLCKit-3.5.1-34408b84-e9eceaed.tar.xz
 
       - name: Compile
-        run: haxelib run lime build ios -D -final
+        run: haxelib run lime build ios -D -final -nosign -D HXCPP_CPP17
 
       # - name: Check Code Signing
         # run: cd export/release/ios/build/Release-iphoneos && codesign -dv *.app
