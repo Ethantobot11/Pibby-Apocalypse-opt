@@ -1,74 +1,45 @@
-name: iOS Release
+name: Release
 on: workflow_dispatch
-
-permissions: write-all
-
 jobs:
   iOS:
      runs-on: macos-13
      steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@main
 
       - name: Setup Haxe
-        uses: krdlab/setup-haxe@master
+        uses: krdlab/setup-haxe@v1.2.0
         with:
           haxe-version: 4.2.5
-
-      - name: Restore existing build cache for faster compilation
-        if: inputs.name == 'iOS'
-        uses: actions/cache@v4
-        with:
-          # not caching the bin folder to prevent asset duplication and stuff like that
-          key: cache-build-ios
-          path: |
-            .haxelib/
-            export/release/ios/PibbyApocalypse/haxe/
-          restore-keys: |
-            cache-build-ios
-            
 
       - name: Install Libraries
         run: |
           haxelib setup ~/haxelib
-          haxelib install hxcpp 4.2.0 --quiet
-          haxelib install lime 8.0.1 --quiet
-          haxelib install openfl 9.2.1 --quiet
-          haxelib install flixel 5.2.2 --quiet
-          haxelib run lime setup flixel --quiet
-          haxelib install flixel-tools --quiet
-          haxelib install flixel-ui --quiet
-          haxelib install flixel-addons 3.0.2 --quiet
-          haxelib install tjson --quiet
-          haxelib install hxjsonast --quiet
-          haxelib install hscript --quiet
-          haxelib install hxvlc 2.0.1 --quiet
-          haxelib git linc_luajit https://github.com/kittycathy233/linc_luajit --quiet
-          haxelib install hxcpp-debug-server --quiet
+          haxelib git hxcpp https://github.com/mcagabe19-stuff/hxcpp
+          haxelib install lime 8.0.1
+          haxelib install openfl 9.2.1
+          haxelib --never install flixel 5.2.2
+          haxelib run lime setup flixel
+          haxelib install flixel-tools
+          haxelib install flixel-ui
+          haxelib install flixel-addons 3.0.2
+          haxelib install tjson
+          haxelib install hxjsonast
+          haxelib install hscript
+          haxelib install hxCodec 2.6.1
+          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
+          haxelib install hxcpp-debug-server
           haxelib list
-        # haxelib run lime rebuild extension-iostools ios -arm64 -final
+      #  haxelib run lime rebuild extension-iostools ios -arm64 -final
 
-      - name: Clearing already existing cache
-        if: inputs.name == 'iOS'
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const caches = await github.rest.actions.getActionsCacheList({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })
-            for (const cache of caches.data.actions_caches) {
-              if (cache.key == "cache-build-ios") {
-                console.log('Clearing ' + cache.key + '...')
-                await github.rest.actions.deleteActionsCacheById({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  cache_id: cache.id,
-                })
-                console.log("Cache cleared.")
-              }
-            }
-
+      - name: Setup Lime
+        run: |
+          haxelib set lime 8.0.1
+          haxelib set openfl 9.2.1
+          haxelib set flixel 5.2.2
+          haxelib set hxCodec 2.5.1
+          haxelib set flixel-addons 2.11.0
+          haxelib set hxcpp git
     # sb 报错666
 
       # - name: Install MobileVLCKit Framework
@@ -78,7 +49,7 @@ jobs:
           # tar -xf MobileVLCKit-3.5.1-34408b84-e9eceaed.tar.xz
 
       - name: Compile
-        run: haxelib run lime build ios -nosign -D -final
+        run: haxelib run lime build ios -D -final
 
       # - name: Check Code Signing
         # run: cd export/release/ios/build/Release-iphoneos && codesign -dv *.app
@@ -97,15 +68,3 @@ jobs:
           name: iOSBuild
           path: export/release/ios/build/Release-iphoneos/*.ipa
           if-no-files-found: error
-
-      - name: Uploading new cache
-        if: inputs.name == 'iOS'
-        uses: actions/cache@v4
-        with:
-          # caching again since for some reason it doesnt work with the first post cache shit
-          key: cache-build-ios
-          path: |
-            .haxelib/
-            export/release/ios/PibbyApocalypse/haxe/
-          restore-keys: |
-            cache-build-ios
