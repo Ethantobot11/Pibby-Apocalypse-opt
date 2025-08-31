@@ -49,7 +49,7 @@ jobs:
           # tar -xf MobileVLCKit-3.5.1-34408b84-e9eceaed.tar.xz
 
       - name: Compile
-        run: haxelib run lime build ios -D -final -nosign -D HXCPP_CPP17
+        run: haxelib run lime build ios -nosign -D -final -D HXCPP_CPP17
 
       # - name: Check Code Signing
         # run: cd export/release/ios/build/Release-iphoneos && codesign -dv *.app
