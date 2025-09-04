@@ -168,10 +168,25 @@
 	<haxedef name="HXCPP_CHECK_POINTER"/>
 	<haxedef name="HXCPP_STACK_LINE"/>
 
-        <config:android gradle-version="7.5.1" />
-        <config:android gradle-plugin="7.3.1" />
+	<!-- Do whatever you want I'm tired uninstall and install everytime -->
+	<certificate path="key.keystore" password="psychengine" alias="psychport" alias-password="psychengine" if="android" unless="debug" />
 
-	<android permission="android.permission.CAPTURE_AUDIO_OUTPUT"/>
+	<!-- Category Type for Apple Systems -->
+	<config:ios category_type="public.app-category.music-games" />
+	<config:mac category_type="public.app-category.music-games" />
+
+	<!--Disable deprecated warnings-->
+	<haxedef name='no-deprecation-warnings' />
+
+	<!--Avoid memory leaks with for loops in HScript-->
+	<haxedef name="loop_unroll_max_cost" value="25" />
+	<haxedef name="DISABLED_MACRO_SUPERLATIVE" if="android" />
+
+	<!--Macro fixes-->
+	<haxeflag name="--macro" value="allowPackage('flash')" />
+	<haxeflag name="--macro" value="include('my.pack')" />
+
+	<haxedef name="SHARE_MOBILE_FILES" if="mobile" /
 
 	
 	<!-- _________________________________ Custom _______________________________ -->
