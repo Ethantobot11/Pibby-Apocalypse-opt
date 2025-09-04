@@ -81,7 +81,7 @@ import sys.io.File;
 #end
 
 #if VIDEO_ALLOWED
-import VideoSprite
+import hxvlc.flixel.FlxVideoSprite as VideoSprite;
 #end
 
 class PlayState extends MusicBeatState
@@ -1689,68 +1689,53 @@ class PlayState extends MusicBeatState
 	public function youCheatedRah()
 	{
 		#if VIDEOS_ALLOWED
-		inCutscene = !forMidSong;
-		canPause = forMidSong;
+		inCutscene = true;
 
-		var foundFile:Bool = false;
-		var fileName:String = Paths.video(name);
-
+		var filepath:String = Paths.video(name);
 		#if sys
-		if (FileSystem.exists(fileName))
+		if(!FileSystem.exists(filepath))
 		#else
-		if (OpenFlAssets.exists(fileName))
+		if(!OpenFlAssets.exists(filepath))
 		#end
-		foundFile = true;
-
-		if (foundFile)
 		{
-			videoCutscene = new VideoSprite(fileName, forMidSong, canSkip, loop);
-			if(forMidSong) videoCutscene.videoSprite.bitmap.rate = playbackRate;
-
-			// Finish callback
-			if (!forMidSong)
-			{
-				function onVideoEnd()
-				{
-					if (!isDead && generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null && !endingSong && !isCameraOnForcedPos)
-					{
-						moveCameraSection();
-						FlxG.camera.snapToTarget();
-					}
-					videoCutscene = null;
-					canPause = true;
-					inCutscene = false;
-					startAndEnd();
-				}
-				videoCutscene.finishCallback = onVideoEnd;
-				videoCutscene.onSkip = onVideoEnd;
-			}
-			if (GameOverSubstate.instance != null && isDead) GameOverSubstate.instance.add(videoCutscene);
-			else add(videoCutscene);
-
-			if (playOnLoad)
-				videoCutscene.play();
-			return videoCutscene;
+			FlxG.log.warn('Couldnt find video file: ' + name);
+			startAndEnd();
+			return;
 		}
-		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-		else addTextToDebug("Video not found: " + fileName, FlxColor.RED);
-		#else
-		else FlxG.log.error("Video not found: " + fileName);
-		#end
+
+		var video:VideoSprite = new VideoSprite();
+		add(video);
+		video.load(filepath);
+		video.play();
+		video.cameras = [luaTpadCam];
+		video.alpha = 1;
+		video.visible = true;
+		video.bitmap.onFormatSetup.add(function()
+		{
+			video.setGraphicSize(FlxG.width, FlxG.height);
+			video.updateHitbox();
+			video.screenCenter();
+		});
+		video.bitmap.onEndReached.add(function()
+		{
+			video.destroy();
+			startAndEnd();
+			return;
+		});
 		#else
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();
+		return;
 		#end
-		return null;
-	}	
+	}
 
 	function startAndEnd()
 	{
-		 if(endingSong)
-			 endSong();
-		 else
-			 startCountdown();
-    }
+		if(endingSong)
+			endSong();
+		else
+			startCountdown();
+	}
 
 	var startTimer:FlxTimer;
 	var finishTimer:FlxTimer = null;
