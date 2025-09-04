@@ -2,7 +2,7 @@ name: Release IOS
 on: workflow_dispatch
 jobs:
   iOS:
-     runs-on: macos-15
+     runs-on: macos-13
      steps:
       - name: Checkout
         uses: actions/checkout@main
