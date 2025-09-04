@@ -2,7 +2,7 @@ name: Release IOS
 on: workflow_dispatch
 jobs:
   iOS:
-     runs-on: macos-13
+     runs-on: macos-15
      steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -17,9 +17,8 @@ jobs:
           haxelib setup ~/haxelib
           haxelib git hxcpp https://github.com/kittycathy233/hxcpp --quiet
           haxelib install lime 8.0.1 --quiet
-          haxelib install openfl 9.2.1 --quiet
+          haxelib install openfl 9.2.2 --quiet
           haxelib --never install flixel 5.2.2 --quiet
-          haxelib run lime setup flixel --quiet
           haxelib install flixel-tools --quiet
           haxelib install flixel-ui --quiet
           haxelib install flixel-addons 3.0.2 --quiet
@@ -34,11 +33,11 @@ jobs:
 
       - name: Setup Lime
         run: |
-          haxelib set lime 8.0.1
-          haxelib set openfl 9.2.2
-          haxelib set flixel 5.2.2
-          haxelib set hxvlc 1.9.0
-          haxelib set flixel-addons 2.11.0
+          haxelib set lime 8.0.1 --always
+          haxelib set openfl 9.2.2 --always
+          haxelib set flixel 5.2.2 --always
+          haxelib set hxvlc 1.9.0 --always
+          haxelib set flixel-addons 2.11.0 --always
           haxelib set hxcpp git
     # sb 报错666
 
@@ -49,7 +48,7 @@ jobs:
           # tar -xf MobileVLCKit-3.5.1-34408b84-e9eceaed.tar.xz
 
       - name: Compile
-        run: haxelib run lime build ios -nosign -D -final -D HXCPP_CPP17
+        run: haxelib run lime build ios -nosign -D -final -D
 
       # - name: Check Code Signing
         # run: cd export/release/ios/build/Release-iphoneos && codesign -dv *.app
