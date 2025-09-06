@@ -33,7 +33,7 @@ jobs:
 
       - name: Setup Lime
         run: |
-          haxelib set lime 8.0.1 --always
+          haxelib set lime git
           haxelib set openfl 9.2.2 --always
           haxelib set flixel 5.2.2 --always
           haxelib set hxvlc 1.9.0 --always
