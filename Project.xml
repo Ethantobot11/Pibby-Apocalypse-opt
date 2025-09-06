@@ -194,6 +194,7 @@
 	<haxedef name="IPHONE_MIN_VERSION" value="12.0" /> <!-- or 15.0 -->
     <haxedef name="IPHONE_ARCHS" value="arm64" />
     <haxedef name="HXCPP_ARM64" />
+	<haxedef name="NO_SIGN" />
 		
 
 	
