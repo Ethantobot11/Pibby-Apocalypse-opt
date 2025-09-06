@@ -191,6 +191,9 @@
 	<config:android gradle-version="8.10.0" />
     <config:android gradle-plugin="8.9.0" />
 
+	<haxedef name="IPHONE_MIN_VERSION" value="15.0" />
+		
+
 	
 	<!-- _________________________________ Custom _______________________________ -->
 
