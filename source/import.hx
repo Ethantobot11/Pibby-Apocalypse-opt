@@ -1,5 +1,6 @@
 #if !macro
 import Paths;
+import mobile.StorageUtil;
 import Highscore;
 #end
 #if android
