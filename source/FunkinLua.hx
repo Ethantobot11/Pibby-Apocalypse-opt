@@ -2949,14 +2949,14 @@ class FunkinLua {
 			return PlayState.instance.luaTouchPadReleased(button);
 		});
 
+		Lua_helper.add_callback(lua, "touchJustPressed", TouchUtil.justPressed);
+			return TouchUtil.overlapsComplex(obj, cam);
+		});
+
 		call('onCreate', []);
 		#end
 	}
 }
-
-		Lua_helper.add_callback(lua, "touchJustPressed", TouchUtil.justPressed);
-			return TouchUtil.overlapsComplex(obj, cam);
-		});
 
 	public static function isOfTypes(value:Any, types:Array<Dynamic>)
 	{
