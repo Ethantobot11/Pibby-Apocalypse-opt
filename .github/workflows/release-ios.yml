@@ -12,6 +12,18 @@ jobs:
         with:
           haxe-version: 4.2.5
 
+      - name: Restore existing build cache for faster compilation
+        if: inputs.name == 'iOS'
+        uses: actions/cache@v4
+        with:
+          # not caching the bin folder to prevent asset duplication and stuff like that
+          key: cache-build-ios
+          path: |
+            .haxelib/
+            export/release/ios/PsychEngine/haxe/
+          restore-keys: |
+            cache-build-ios
+
       - name: Install Libraries
         run: |
           haxelib setup ~/haxelib
@@ -30,6 +42,27 @@ jobs:
           haxelib install hxcpp-debug-server --quiet
           haxelib list
       #  haxelib run lime rebuild extension-iostools ios -arm64 -final
+
+      - name: Clearing already existing cache
+        if: inputs.name == 'iOS'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const caches = await github.rest.actions.getActionsCacheList({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+            for (const cache of caches.data.actions_caches) {
+              if (cache.key == "cache-build-ios") {
+                console.log('Clearing ' + cache.key + '...')
+                await github.rest.actions.deleteActionsCacheById({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  cache_id: cache.id,
+                })
+                console.log("Cache cleared.")
+              }
+            }
 
       - name: Setup Lime
         run: |
@@ -69,3 +102,15 @@ jobs:
           name: iOSBuild
           path: export/release/ios/build/Release-iphoneos/*.ipa
           if-no-files-found: error
+
+      - name: Uploading new cache
+        if: inputs.name == 'iOS'
+        uses: actions/cache@v4
+        with:
+          # caching again since for some reason it doesnt work with the first post cache shit
+          key: cache-build-ios
+          path: |
+            .haxelib/
+            export/release/ios/PsychEngine/haxe/
+          restore-keys: |
+            cache-build-ios
