@@ -7,6 +7,16 @@ import flixel.graphics.FlxGraphic;
 import Controls;
 
 class ClientPrefs {
+	// Mobile and Mobile Controls Releated
+	public static var extraButtons:String = "NONE"; // mobile extra button option
+	public static var hitboxPos:Bool = true; // hitbox extra button position option
+	public static var controlsAlpha:Float = FlxG.onMobile ? 0.6 : 0;
+	public static var screensaver:Bool = false;
+	public static var hitboxType:String = "Gradient";
+	public static var popUpRating:Bool = true;
+	public static var vsync:Bool = false;
+	public static var gameOverVibration:Bool = false;
+	
 	public static var downScroll:Bool = false;
 	public static var onlineNote:Bool = false;
 	public static var combohudgame:Bool = true;
@@ -166,6 +176,31 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
+		if(FlxG.save.data.extraButtons != null) {
+			extraButtons = FlxG.save.data.extraButtons;
+		}
+		if(FlxG.save.data.hitboxPos != null) {
+			hitboxPos = FlxG.save.data.hitboxPos;
+		}
+		if(FlxG.save.data.controlsAlpha != null) {
+			controlsAlpha = FlxG.save.data.controlsAlpha;
+		}
+		if(FlxG.save.data.screensaver != null) {
+			screensaver = FlxG.save.data.screensaver;
+		}
+		if(FlxG.save.data.hitboxType != null) {
+			hitboxType = FlxG.save.data.hitboxType;
+		}
+		if(FlxG.save.data.popUpRating != null) {
+			popUpRating = FlxG.save.data.popUpRating;
+		}
+		if(FlxG.save.data.vsync != null) {
+			vsync = FlxG.save.data.vsync;
+		}
+		if(FlxG.save.data.gameOverVibration != null) {
+			gameOverVibration = FlxG.save.data.gameOverVibration;
+		}
+		
 		if(FlxG.save.data.autopause != null) {
 			autopause = FlxG.save.data.autopause;
 		}
