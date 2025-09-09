@@ -120,8 +120,8 @@ class GameOverSubstate extends MusicBeatSubstate
         FlxG.camera.snapToTarget();
 
 		#if mobile // ja to ficano puto ja mermao
-		addVirtualPad(NONE, A_B);
-		addVirtualPadCamera(false);
+		addTouchPad("LEFT_FULL", "A_B_C");
+		addTouchPadCamera();
 		#end
 	}
 
