@@ -39,37 +39,37 @@ class OptionsState extends MusicBeatState
 		switch(label) {
             case 'Pibby Apocalypse':
 			  #if mobile
-        removeVirtualPad();
+        touchPad.active = touchPad.visible = persistentUpdate = false;
 			  #end
 				openSubState(new options.PibbyOptionsSubState());
 			case 'Note Colors':
 			    #if mobile
-			    removeVirtualPad();
+			    touchPad.active = touchPad.visible = persistentUpdate = false;
           #end
 				openSubState(new options.NotesSubState());
 			case 'Controls':
 			   #if mobile
-		   	 removeVirtualPad();
+		   	 touchPad.active = touchPad.visible = persistentUpdate = false;
          #end
 				openSubState(new options.ControlsSubState());
 			case 'Graphics':
 			    #if mobile
-          removeVirtualPad();
+          touchPad.active = touchPad.visible = persistentUpdate = false;
 		   	  #end
 				openSubState(new options.GraphicsSettingsSubState());
 			case 'Visuals and UI':
 			    #if mobile
-          removeVirtualPad();
+          touchPad.active = touchPad.visible = persistentUpdate = false;
           #end
 				openSubState(new options.VisualsUISubState());
 			case 'Gameplay':
 			     #if mobile
-           removeVirtualPad();
+          touchPad.active = touchPad.visible = persistentUpdate = false;
 				   #end
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
 			  #if mobile
-				removeVirtualPad();
+				touchPad.active = touchPad.visible = persistentUpdate = false;
 				#end
 				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
 		}
@@ -114,7 +114,7 @@ class OptionsState extends MusicBeatState
 		ClientPrefs.saveSettings();
 
    #if mobile
-   addVirtualPad(UP_DOWN, A_B_X_Y);
+   addTouchPad("UP_DOWN", "A_B_X_Y");
    #end
 
    #if mobile
@@ -135,20 +135,22 @@ class OptionsState extends MusicBeatState
 	}
 
 	override function closeSubState() {
-		super.closeSubState();
+		persistentUpdate = true;
+		removeTouchPad();
+		addTouchPad("UP_DOWN", "A_B_X_Y");
 		ClientPrefs.saveSettings();
 	}
 
 	override function update(elapsed:Float) {
 
     #if mobile
-	 if (virtualPad.buttonX.justPressed)
+	 if (TouchPad.buttonX.justPressed)
 		{
-			removeVirtualPad();
+			removeTouchPad();
 			openSubState(new mobile.MobileControlsSubState());
 		}
-		if (virtualPad.buttonY.justPressed) {
-			removeVirtualPad();
+		if (TouchPad.buttonY.justPressed) {
+			removeTouchPad();
 			openSubState(new mobile.AndroidSettingsSubState());
 		}
 	#end
