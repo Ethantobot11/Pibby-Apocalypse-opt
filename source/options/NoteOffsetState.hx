@@ -199,7 +199,7 @@ class NoteOffsetState extends MusicBeatState
 		FlxG.sound.playMusic(Paths.music('offsetSong'), 1, true);
 
         #if mobile
-		addTouchPad(onComboMenu ? "NONE" : "LEFT_RIGHT", "A_B_C");
+		addTouchPad("LEFT_FULL", "A_B_C");
 		addTouchPadCamera();
         #end
 
