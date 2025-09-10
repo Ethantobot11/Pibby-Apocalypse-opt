@@ -90,8 +90,8 @@ class NotesSubState extends MusicBeatSubstate
 		add(hsbText);
 
         #if mobile
-		addVirtualPad(LEFT_FULL, A_B_C);
-		addVirtualPadCamera(false);
+		addTouchPad("LEFT_FULL", "A_B_C");
+		addTouchPadCamera(false);
 		#end
 
 		changeSelection();
@@ -104,7 +104,7 @@ class NotesSubState extends MusicBeatSubstate
 				if(controls.UI_LEFT_P) {
 					updateValue(-1);
 					FlxG.sound.play(Paths.sound('scrollMenu'));
-				} else if(controls.UI_RIGHT_P) {
+				} else if(touchPad.buttonC.justPressed || controls.RESET) {
 					updateValue(1);
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 				} else if(controls.RESET) {
@@ -148,7 +148,7 @@ class NotesSubState extends MusicBeatSubstate
 				changeType(1);
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
-			if(controls.RESET #if mobile || virtualPad.buttonC.justPressed #end) {
+			if(controls.RESET #if mobile || TouchPad.buttonC.justPressed #end) {
 				for (i in 0...3) {
 					resetValue(curSelected, i);
 				}
