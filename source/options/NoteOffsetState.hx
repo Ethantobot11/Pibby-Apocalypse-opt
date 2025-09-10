@@ -199,8 +199,8 @@ class NoteOffsetState extends MusicBeatState
 		FlxG.sound.playMusic(Paths.music('offsetSong'), 1, true);
 
         #if mobile
-		addVirtualPad(LEFT_FULL, A_B);
-		addVirtualPadCamera(false);
+		addTouchPad(onComboMenu ? "NONE" : "LEFT_RIGHT", "A_B_C");
+		addTouchPadCamera();
         #end
 
 		super.create();
@@ -301,13 +301,20 @@ class NoteOffsetState extends MusicBeatState
 				}
 			}
 
-			if(controls.RESET)
+			if( touchPad.buttonC.justPressed || controls.RESET)
 			{
 				for (i in 0...ClientPrefs.comboOffset.length)
 				{
-					ClientPrefs.comboOffset[i] = 0;
-				}
-				repositionCombo();
+				updateNoteDelay();
+			
+			}
+			if( touchPad.buttonC.justPressed || controls.RESET)
+			{
+				holdTime = 0;
+				barPercent = 0;
+		timeTxt.text = 'Current offset: ' + Math.floor(barPercent) + ' ms';
+	}
+			final buttonAccept:String = controls.mobileC ? 'A' : 'Accept';
 			}
 		}
 		else
