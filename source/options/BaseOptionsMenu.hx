@@ -124,8 +124,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		}
 
        #if mobile
-	   addVirtualPad(LEFT_FULL, A_B_C);
-       addVirtualPadCamera(false);
+	   addTouchPad("LEFT_FULL", "A_B_C");
 	   #end
 		changeSelection();
 		reloadCheckboxes();
@@ -248,7 +247,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				}
 			}
 
-			if(controls.RESET #if mobile || virtualPad.buttonC.justPressed #end)
+			if(controls.RESET #if mobile || touchPad.buttonC.justPressed #end)
 			{
 				for (i in 0...optionsArray.length)
 				{
