@@ -2912,8 +2912,7 @@ class FunkinLua {
 			 }
 		 }
 		 return false;
-	 }
-} 
+	    }
 
 		Lua_helper.add_callback(lua, "touchJustPressed", TouchUtil.justPressed);
 			return TouchUtil.overlapsComplex(obj, cam);
