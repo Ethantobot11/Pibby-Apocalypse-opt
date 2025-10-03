@@ -2897,6 +2897,7 @@ class FunkinLua {
 			else
 				PlayState.instance.addLuaTouchPad();
 		});
+		}
 
 		public static function insertLuaTpad(?pos:Int = -1)
 	    {
