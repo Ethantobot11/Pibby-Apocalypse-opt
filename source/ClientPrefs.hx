@@ -120,6 +120,14 @@ class ClientPrefs {
 	public static function saveSettings() {
 		FlxG.save.data.autopause = autopause;
 		FlxG.autoPause = FlxG.save.data.autopause;
+		FlxG.save.data.extraButtons = extraButtons;
+		FlxG.save.data.hitboxPos = hitboxPos;
+		FlxG.save.data.controlsAlpha = controlsAlpha;
+		FlxG.save.data.screensaver = screensaver;
+		FlxG.save.data.hitboxType = hitboxType;
+		FlxG.save.data.popUpRating = popUpRating;
+		FlxG.save.data.vsync = vsync;
+		FlxG.save.data.gameOverVibration = gameOverVibration;
 
 		FlxG.save.data.downScroll = downScroll;
 		FlxG.save.data.middleScroll = middleScroll;
@@ -199,10 +207,6 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.gameOverVibration != null) {
 			gameOverVibration = FlxG.save.data.gameOverVibration;
-		}
-		
-		if(FlxG.save.data.autopause != null) {
-			autopause = FlxG.save.data.autopause;
 		}
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;
