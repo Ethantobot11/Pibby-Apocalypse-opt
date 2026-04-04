@@ -2952,11 +2952,10 @@ class FunkinLua {
 		call('onCreate', []);
 		#end
 
-		Lua_helper.add_callback(lua, "touchJustPressed", TouchUtil.justPressed);
+		Lua_helper.add_callback(lua, "touchJustPressed", TouchUtil.justPressed) {
 			return TouchUtil.overlapsComplex(obj, cam);
 		});
 	}
-
 	public static function isOfTypes(value:Any, types:Array<Dynamic>)
 	{
 		for (type in types)
