@@ -2955,7 +2955,6 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "touchJustPressed", function() {
     		return TouchUtil.justPressed; 
 		});
-	}
 								
 	public static function isOfTypes(value:Any, types:Array<Dynamic>)
 	{
