@@ -2898,9 +2898,6 @@ class FunkinLua {
 				PlayState.instance.addLuaTouchPad();
 		});
 
-		Lua_helper.add_callback(lua, "touchJustPressed", TouchUtil.justPressed);
-			return TouchUtil.overlapsComplex(obj, cam);
-					
 		Lua_helper.add_callback(lua, "removeTouchPad", () ->
 		{
 			PlayState.instance.removeLuaTouchPad();
@@ -2955,7 +2952,10 @@ class FunkinLua {
 		call('onCreate', []);
 		#end
 	}
-}
+
+		Lua_helper.add_callback(lua, "touchJustPressed", TouchUtil.justPressed);
+			return TouchUtil.overlapsComplex(obj, cam);
+		});
 
 	public static function isOfTypes(value:Any, types:Array<Dynamic>)
 	{
@@ -2965,24 +2965,6 @@ class FunkinLua {
 		}
 		return false;
 	}
-}
-
-	 public static function insertLuaTpad(?pos:Int = -1)
-	 {
-		    if(instance != null)
-		    {
-			    var tagObject:FlxObject = PlayState.instance.luaTouchPad;
-
-			    if(tagObject != null)
-			{
-				   if(pos < 0) instance.add(tagObject);
-				   else instance.insert(pos, tagObject);
-				   return true;
-			 }
-		 }
-		 return false;
-	 }
-}
 
 	#if hscript
 	public function initHaxeModule()
