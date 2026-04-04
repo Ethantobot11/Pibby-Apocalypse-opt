@@ -2,7 +2,7 @@ name: Release IOS
 on: workflow_dispatch
 jobs:
   iOS:
-     runs-on: macos-13
+     runs-on: macos-14
      steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -13,7 +13,6 @@ jobs:
           haxe-version: 4.2.5
 
       - name: Restore existing build cache for faster compilation
-        if: inputs.name == 'iOS'
         uses: actions/cache@v4
         with:
           # not caching the bin folder to prevent asset duplication and stuff like that
@@ -104,7 +103,6 @@ jobs:
           if-no-files-found: error
 
       - name: Uploading new cache
-        if: inputs.name == 'iOS'
         uses: actions/cache@v4
         with:
           # caching again since for some reason it doesnt work with the first post cache shit
