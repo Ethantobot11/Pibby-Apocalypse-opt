@@ -2952,8 +2952,8 @@ class FunkinLua {
 		call('onCreate', []);
 		#end
 
-		Lua_helper.add_callback((lua, "touchJustPressed", TouchUtil.justPressed) {
-			return TouchUtil.overlapsComplex(obj, cam)
+		Lua_helper.add_callback(lua, "touchJustPressed", function() {
+    		return TouchUtil.justPressed; 
 		});
 	}
 								
